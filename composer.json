@@ -1,0 +1,16 @@
+{
+    "name": "johnwilson008/notify-robot",
+    "description": "webhook-notify",
+    "autoload": {
+        "psr-4": {
+            "Johnwilson008\\NotifyRobot\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "JohnWilson008",
+            "email": "JohnWilson008@protonmail.com"
+        }
+    ],
+    "require": {}
+}
