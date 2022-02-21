@@ -3,9 +3,9 @@
 Webhook notify
 
 ```php
-
+use JohnWilson008\NotifyRobot\Entrance;
 // Text Message
-Factory::Webhook()
+Entrance::Webhook()
     ->setSecret('693a91f6-7xxx-4bc4-97a0-0ec2sifa5aaa')
     ->setMessageParams('text',[
         'content'               => 'This is content.',
