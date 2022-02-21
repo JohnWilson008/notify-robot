@@ -11,6 +11,6 @@ Entrance::Webhook()
         'content'               => 'This is content.',
         // 'mentioned_list'        => ["wangqing", "@all"],
         // 'mentioned_mobile_list' => ["13800001111", "@all"],
-    ])->send();
+    ])->sendPostParams();
 
 ```
