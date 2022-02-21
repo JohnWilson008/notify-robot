@@ -12,5 +12,6 @@
             "email": "JohnWilson008@protonmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "license": "MIT"
 }
