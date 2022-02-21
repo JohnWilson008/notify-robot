@@ -2,6 +2,10 @@
 
 
 namespace JohnWilson008\NotifyRobot\Channel;
+require_once __DIR__ . '/Client.php';
+use JohnWilson008\NotifyRobot\Channel\Client;
+
+
 
 class WebhookChannel extends Client
 {

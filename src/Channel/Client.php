@@ -2,6 +2,8 @@
 
 
 namespace JohnWilson008\NotifyRobot\Channel;
+
+require_once __DIR__ . '/../Http/Client.php';
 use JohnWilson008\NotifyRobot\Http\Client as HttpClient;
 
 class Client
