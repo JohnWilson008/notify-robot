@@ -7,7 +7,7 @@ Webhook notify
 composer require johnwilson008/notify-robot
 
 
-require_once './src/Entrance.php';
+require_once __DIR__ . '/../../../../vendor/johnwilson008/notify-robot/src/Entrance.php';
 use JohnWilson008\NotifyRobot\Entrance;
 
 
