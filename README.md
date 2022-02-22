@@ -4,6 +4,8 @@ Webhook notify
 
 ```php
 
+composer require johnwilson008/notify-robot
+
 
 require_once './src/Entrance.php';
 use JohnWilson008\NotifyRobot\Entrance;
