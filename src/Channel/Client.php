@@ -9,8 +9,11 @@ use JohnWilson008\NotifyRobot\Http\Client as HttpClient;
 class Client
 {
     protected $message = [];
+    protected $uploadMediaOption = [];
     protected $secret = '';
     protected $mediaId = '';
+    protected $curl_file = '';
+    protected $file_media_info = '';
 
     protected $msgTextType = 'text';
     protected $msgMarkdownType = 'markdown';
@@ -18,6 +21,19 @@ class Client
     protected $msgNewsType = 'news';
     protected $msgFileType = 'file';
     protected $msgTemplateCardType = 'template_card';
+
+
+
+    public function getUploadMediaOption()
+    {
+        return $this->uploadMediaOption;
+    }
+
+    public function setUploadMediaOption($uploadMediaOption)
+    {
+        $this->uploadMediaOption = $uploadMediaOption;
+        return $this;
+    }
 
 
 
@@ -31,18 +47,18 @@ class Client
         $this->secret = $secret;
         return $this;
     }
-     public function msgWxHookTypeList()
-     {
-         $msgTypeList = [
-             $this->msgTextType=>$this->msgTextType,
-             $this->msgMarkdownType=>$this->msgMarkdownType,
-             $this->msgImageType=>$this->msgImageType,
-             $this->msgNewsType=>$this->msgNewsType,
-             $this->msgFileType=>$this->msgFileType,
-             $this->msgTemplateCardType=>$this->msgTemplateCardType,
-         ];
-         return $msgTypeList;
-     }
+    public function msgWxHookTypeList()
+    {
+        $msgTypeList = [
+            $this->msgTextType=>$this->msgTextType,
+            $this->msgMarkdownType=>$this->msgMarkdownType,
+            $this->msgImageType=>$this->msgImageType,
+            $this->msgNewsType=>$this->msgNewsType,
+            $this->msgFileType=>$this->msgFileType,
+            $this->msgTemplateCardType=>$this->msgTemplateCardType,
+        ];
+        return $msgTypeList;
+    }
 
     public function setWebHookMediaId($mediaId)
     {
@@ -80,10 +96,10 @@ class Client
         $data = $httpClient->sendPost($url ,$data);
         return $data;
     }
-    public function uploadMedia($url ,$data)
+    public function uploadMedia($url ,$data,$option=[])
     {
         $httpClient = new HttpClient();
-        $data = $httpClient->uploadMedia($url ,$data);
+        $data = $httpClient->uploadMedia($url ,$data,$option);
         return $data;
     }
 }
