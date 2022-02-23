@@ -1,6 +1,11 @@
 # notify-robot
 
-Webhook notify
+Webhook 、Dingtalk notify
+
+
+<details>
+<summary><b>WeWork</b></summary>
+
 
 ```php
 
@@ -144,25 +149,138 @@ echo PHP_EOL;
 $ret = '{"errcode":0,"errmsg":"ok"}';
 $ret = '{"errcode":44001,"errmsg":"empty media data, hint: [1645511211206732567358835], from ip: 183.242.42.7, more info at https://open.work.weixin.qq.com/devtool/query?e=44001"}';
 
+```
+</details>
+
+
+<details>
+<summary><b>DingTalk</b></summary>
+
+
+```php
+
+// Text Message
+$ret = Entrance::make('Dingtalk')
+    ->setSecret('69a16-7xx-4b4-970-0e2sfa5a')
+    ->setToken('579b9238c91ddf19c4d825e6756a597a')
+    ->setMessageParams('text',[
+        'content'               => '广州今日天气：29度，大部分多云，降雨概率：60%',
+    ])->sendPostParams();
+var_dump($ret);
 
 
 
 
+$contentMarkDown = "## 杭州天气 **@150XXXXXXXX** \n";
+$contentMarkDown .= "#### *9*度，西北风1级，空气良*89*，相对温度73% \n";
+$contentMarkDown .= "### 发布 \n > ###### 10点20分发布 [天气](https://www.dingtalk.com) \n > ![screenshot](https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png) \n > #### 10点30分发布 [天气](https://www.dingtalk.com) \n";
+$contentMarkDown .= "![screenshot](https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png) \n";
+$contentMarkDown .= "### 实时新增用户反馈 \n > ###### 类型: 用户反馈 \n > #### 普通用户反馈: 117例 \n > ##### VIP用户反馈: 15例 \n";
+$contentMarkDown .= "## 无序列表 \n - item1 \n - item2 \n";
+$contentMarkDown .= "## 有序列表 \n 1. item1 \n 2. item2 \n";
+
+$titleMarkDown = '实时新增用户反馈';
+$ret = Entrance::make('Dingtalk')
+    ->setSecret('69a16-7xx-4b4-970-0e2sfa5a')
+    ->setToken('579b9238c91ddf19c4d825e6756a597a')
+    ->setMessageParams('markdown',[
+        'title' => $titleMarkDown,
+        'text' => $contentMarkDown,
+    ])->sendPostParams();
+var_dump($ret);
+echo PHP_EOL;
 
 
 
+$ret = Entrance::make('Dingtalk')
+    ->setSecret('69a16-7xx-4b4-970-0e2sfa5a')
+    ->setToken('579b9238c91ddf19c4d825e6756a597a')
+    ->setMessageParams('link',[
+        'title' => '时代的火车向前开',
+        'text' => '这个即将发布的新版本，创始人xx称它为红树林。',
+        'picUrl' => 'http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1.png',
+        'messageUrl' => 'https://open.dingtalk.com/document/group/custom-robot-access',
+    ])->sendPostParams();
+var_dump($ret);
+echo PHP_EOL;
 
 
 
+$actionCard=[
+    "title"=>"乔布斯 20 年前想打造一间苹果咖啡厅，而它正是 Apple Store 的前身",
+        "text"=>"![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png) 
+ ### 乔布斯 20 年前想打造的苹果咖啡厅 
+ Apple Store 的设计正从原来满满的科技感走向生活化，而其生活化的走向其实可以追溯到 20 年前苹果一个建立咖啡馆的计划",
+        "btnOrientation"=>"0",
+        "singleTitle" =>"阅读全文",
+        "singleURL" =>"https://open.dingtalk.com/document/group/custom-robot-access",
+];
+$ret = Entrance::make('Dingtalk')
+    ->setSecret('69a16-7xx-4b4-970-0e2sfa5a')
+    ->setToken('579b9238c91ddf19c4d825e6756a597a')
+    ->setMessageParams('actionCard',$actionCard)->sendPostParams();
+var_dump($ret);
+echo PHP_EOL;
+
+
+$actionCard=[
+    "title"=>"我 20 年前想打造一间苹果咖啡厅，而它正是 Apple Store 的前身",
+        "text"=>"![screenshot](https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png) \n\n #### 乔布斯 20 年前想打造的苹果咖啡厅 \n\n Apple Store 的设计正从原来满满的科技感走向生活化，而其生活化的走向其实可以追溯到 20 年前苹果一个建立咖啡馆的计划",
+        "btnOrientation"=>"0",
+        // btns more 3
+        "btns"=>[
+            [
+                "title"=>"内容不错",
+                "actionURL"=>"https://open.dingtalk.com/document/group/custom-robot-access"
+            ],
+            [
+                "title"=>"不感兴趣",
+                "actionURL"=>"https://www.dingtalk.com/"
+            ],
+            [
+                "title"=>"你才",
+                "actionURL"=>"https://www.dingtalk.com/"
+            ],
+        ],
+];
+$ret = Entrance::make('Dingtalk')
+    ->setSecret('69a16-7xx-4b4-970-0e2sfa5a')
+    ->setToken('579b9238c91ddf19c4d825e6756a597a')
+    ->setMessageParams('actionCard',$actionCard)->sendPostParams();
+var_dump($ret);
+echo PHP_EOL;
+
+
+$actionCard=[
+    "links"=>[
+        [
+            "title"=>"中秋时代的火车向前开1",
+            "messageURL"=>"https://www.dingtalk.com/",
+            "picURL"=>"https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png",
+        ],
+        [
+            "title"=>"中秋好礼时代的火车向前开2",
+            "messageURL"=>"http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1.png",
+            "picURL"=>"http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1.png",
+        ],
+        [
+            "title"=>"时代的火车向前开3",
+            "messageURL"=>"https://open.dingtalk.com/document/group/custom-robot-access",
+            "picURL"=>"https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png",
+        ],
+    ],
+];
+$ret = Entrance::make('Dingtalk')
+    ->setSecret('69a16-7xx-4b4-970-0e2sfa5a')
+    ->setToken('579b9238c91ddf19c4d825e6756a597a')
+    ->setMessageParams('feedCard',$actionCard)->sendPostParams();
+var_dump($ret);
+echo PHP_EOL;
 
 
 
-
-
-
-
-
-
-
+$ret = '{"errcode":0,"errmsg":"ok"}';
+$ret = '{"errcode":400602,"errmsg":"miss param : feedCard-\u003Elinks"}';
 
 ```
+</details>

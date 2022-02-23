@@ -10,7 +10,9 @@ class Client
 {
     protected $message = [];
     protected $uploadMediaOption = [];
+    protected $curlOption = [];
     protected $secret = '';
+    protected $token = '';
     protected $mediaId = '';
     protected $curl_file = '';
     protected $file_media_info = '';
@@ -21,7 +23,9 @@ class Client
     protected $msgNewsType = 'news';
     protected $msgFileType = 'file';
     protected $msgTemplateCardType = 'template_card';
-
+    protected $msgLinkType = 'link';
+    protected $msgActionCardType = 'actionCard';
+    protected $msgFeedCardType = 'feedCard';
 
 
     public function getUploadMediaOption()
@@ -36,6 +40,16 @@ class Client
     }
 
 
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function setToken($token)
+    {
+        $this->token = $token;
+        return $this;
+    }
 
     public function getSecret()
     {
@@ -59,6 +73,20 @@ class Client
         ];
         return $msgTypeList;
     }
+    public function msgDingtalkTypeList()
+    {
+        $msgTypeList = [
+            $this->msgTextType=>$this->msgTextType,
+            $this->msgLinkType=>$this->msgLinkType,
+            $this->msgMarkdownType=>$this->msgMarkdownType,
+            $this->msgActionCardType=>$this->msgActionCardType,
+            $this->msgFeedCardType=>$this->msgFeedCardType,
+
+        ];
+
+        return $msgTypeList;
+    }
+
 
     public function setWebHookMediaId($mediaId)
     {
@@ -85,17 +113,29 @@ class Client
         return $this->message;
     }
 
+    public function setCurlOption($curlOption)
+    {
+        $this->curlOption = $curlOption;
+        return $this;
+    }
+
+    public function getCurlOption()
+    {
+        return $this->curlOption;
+    }
+
     public function getHttpParams()
     {
         return json_encode($this->message);
     }
 
-    public function sendPost($url ,$data)
+    public function sendPost($url ,$data,$option=[])
     {
         $httpClient = new HttpClient();
-        $data = $httpClient->sendPost($url ,$data);
+        $data = $httpClient->sendPost($url ,$data,$option);
         return $data;
     }
+
     public function uploadMedia($url ,$data,$option=[])
     {
         $httpClient = new HttpClient();
